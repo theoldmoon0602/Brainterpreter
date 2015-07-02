@@ -1,10 +1,11 @@
+package Brainterpreter;
 import java.util.*;
-class Brainterpreter {
+public class Brainterpreter {
   private ArrayList<Character> tokens;
   private HashMap<Integer, Integer> jump_points;
   private String source;
 
-  Brainterpreter (String src) {
+  public Brainterpreter (String src) {
     source = src;
     tokens = new ArrayList<Character>();
     jump_points = new HashMap<Integer, Integer>();
@@ -16,7 +17,6 @@ class Brainterpreter {
   }
   public void Tokenize() {
     int jp_begin = 0;
-    System.out.println(source);
     for (int i = 0; i < source.length(); ++i) {
       Character c = source.charAt(i);
       if (IsValidChar(c)) {
@@ -89,41 +89,3 @@ class Brainterpreter {
     }
   }
 }
-
-class BrainHelper {
-  public static String MakeChar(char c) {
-    String code = "";
-    for (int i = 0; i < (int)c; ++i) {
-      code += '+';
-    }
-    return code;
-  }
-  public static String MakeString(String s) {
-    String code = "";
-    for (int i = 0; i < s.length(); ++i) {
-      code += MakeChar(s.charAt(i)) + '>';
-    }
-    return code;
-  }
-  public static String MakePrintString(String s) {
-    String code = MakeString(s);
-    for (int i = 0; i < s.length(); ++i) {
-      code += '<';
-    }
-    for (int i = 0; i < s.length() - 1; ++i) {
-      code += ".>";
-    }
-    return code + '.';
-  }
-}
-
-class Example {
-  public static void main(String[] args) {
-    Brainterpreter interp = new Brainterpreter(BrainHelper.MakeString("Hello") + "<<<<<.>.>.>.>.");
-    interp.Tokenize();
-    interp.Run();
-  }
-}
-
-
-
